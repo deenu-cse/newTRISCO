@@ -1,0 +1,120 @@
+#contact {
+    padding: 80px 0;
+    background: #f9f9f9;
+  }
+  
+  #contact .section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #112363;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #contact .section-header p {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  #contact .contact-info {
+    margin-bottom: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  #contact .contact-info div {
+    flex: 1;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #contact .contact-info i {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #f82249;
+  }
+  
+  #contact .contact-info h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #112363;
+    margin-bottom: 10px;
+  }
+  
+  #contact .contact-info address,
+  #contact .contact-info p {
+    font-size: 16px;
+    color: #112363;
+  }
+  
+  #contact .contact-info a {
+    color: #4869df;
+  }
+  
+  #contact .contact-info a:hover {
+    color: #f82249;
+  }
+  
+  #contact .form {
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #contact .form .form-group input,
+  #contact .form .form-group textarea {
+    width: 93%;
+    border: 1px solid #ddd;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  #contact .form .form-group input:focus,
+  #contact .form .form-group textarea:focus {
+    border-color: #4869df;
+    outline: none;
+  }
+  
+  #contact .submit-btn {
+    background: #f82249;
+    border: none;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #contact .submit-btn:hover {
+    background: #e0072f;
+  }
+  
+  #contact .text-center {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+.formy button{
+  margin-bottom: 10px;
+}
+
+#sendmessage{
+  color: #0e1e55;
+}
+
+@media (max-width: 768px) {
+  .formy {
+      width: 80%;
+  }
+}

@@ -1,0 +1,76 @@
+/* Container styles */
+.table-container {
+    width: 96%;
+    padding: 20px;
+}
+
+.table-box {
+    background-color: #191c2e;
+    /* Similar to bg-secondary */
+    border-radius: 8px;
+    padding: 20px;
+    height: 100%;
+}
+
+/* Title styles */
+.table-title {
+    color: white;
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.table thead th {
+    background-color: #191c2e;
+    padding: 10px;
+    text-align: left;
+}
+
+.table tbody td,
+.table tbody th {
+    padding: 10px;
+    border-top: 1px solid #6c757d;
+}
+
+.table tbody td button{
+    padding: 3px 7px;
+    font-size: 15px;
+    color: black;
+    background-color: red;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.table tbody {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.table tbody th {
+    font-weight: bold;
+}
+
+.table tbody tr{
+    cursor: pointer;
+}
+
+.flextabel{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 30px auto;
+}
+
+.table-containerx{
+    width: 40%;
+    margin-bottom: 30px;
+}

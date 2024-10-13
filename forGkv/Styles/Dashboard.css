@@ -1,0 +1,19 @@
+/* body{
+    overflow: hidden;
+} */
+.fullflex{
+    width: 100%;
+    display: flex;
+    gap: 40px;
+    overflow: hidden;
+}
+.left{
+    width: 15%;
+    height: 100vh;
+}
+.right{
+    width: 85%;
+    height: 100vh;
+    overflow-y: scroll;
+    background-color: black;
+}

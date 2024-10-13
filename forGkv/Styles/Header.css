@@ -1,0 +1,217 @@
+#header {
+  height: 70px;
+  padding: 5px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  transition: all 0.5s;
+  z-index: 997;
+  background: rgba(6, 12, 34, 0.98);
+}
+
+#header.header-scrolled,
+#header.header-fixed {
+  background: rgba(6, 12, 34, 0.98);
+  height: 70px;
+  padding: 15px 0;
+  transition: all 0.5s;
+}
+
+#header #logo h1 {
+  font-size: 36px;
+  margin: 0;
+  padding: 6px 0;
+  line-height: 1;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+#header #logo h1 span {
+  color: #f82249;
+}
+
+#header #logo h1 a,
+#header #logo h1 a:hover {
+  color: #fff;
+}
+
+#header #logo img {
+  padding: 0;
+  margin: 0;
+  max-height: 40px;
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+
+.nav-menu,
+.nav-menu * {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-menu ul {
+  position: absolute;
+  display: none;
+  top: 100%;
+  left: 0;
+  z-index: 99;
+}
+
+.nav-menu li {
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-menu > li {
+  float: left;
+}
+
+.nav-menu li:hover > ul,
+.nav-menu li.sfHover > ul {
+  display: block;
+}
+
+.nav-menu ul ul {
+  top: 0;
+  left: 100%;
+}
+
+.nav-menu ul li {
+  min-width: 180px;
+}
+
+#nav-menu-container {
+  float: right;
+  margin: 0;
+}
+
+.containerc {
+  display: flex;
+  justify-content: space-around; /* Changed to space-between for better spacing */
+  align-items: center; /* Changed to center for better alignment */
+  padding: 10px;
+}
+
+/* Nav Menu Styling */
+.nav-menu a {
+  padding: 8px;
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(202, 206, 221, 0.8);
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  outline: none;
+}
+
+.nav-menu .menu-active a,
+.nav-menu a:hover {
+  color: #fff;
+}
+
+.nav-menu > li {
+  margin-left: 8px;
+}
+
+.nav-menu li.buy-tickets a {
+  color: #fff;
+  background: #f82249;
+  padding: 7px 22px;
+  border-radius: 50px;
+  border: 2px solid #f82249;
+  transition: all ease-in-out 0.3s;
+  font-weight: 500;
+  margin-left: 8px;
+  margin-top: 2px;
+  line-height: 1;
+  font-size: 13px;
+}
+
+/* Mobile Nav Toggle */
+#mobile-nav-toggle {
+  display: none; /* Initially hide the button */
+  position: fixed;
+  right: 15px; /* Adjust the position */
+  top: 15px; /* Adjust the position */
+  z-index: 999;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Mobile Nav Styling */
+@media (max-width: 768px) {
+  #nav-menu-container {
+      display: none; /* Hide the nav menu */
+  }
+
+  #mobile-nav-toggle {
+      display: block; /* Show mobile toggle */
+  }
+
+  #mobile-nav-toggle img{
+    width: 30px;
+  }  
+
+  #nav-menu-container.active {
+      display: block; /* Show the nav menu when active */
+      position: absolute; /* Position for mobile view */
+      top: 70px; /* Adjust based on your header height */
+      left: 0;
+      right: 0;
+      background: rgba(6, 12, 34, 0.9); /* Background for the mobile menu */
+      z-index: 998; /* Above other content */
+  }
+}
+
+
+.nav-menu li.buy-tickets a:hover {
+  background: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  #nav-menu-container {
+      display: none; /* Hide the nav menu */
+  }
+
+  #mobile-nav-toggle {
+      display: block; /* Show mobile toggle */
+  }
+
+  .containerc {
+      justify-content: space-between; /* Space between logo and toggle */
+  }
+
+  #mobile-nav {
+      left: -260px; /* Position off-screen */
+  }
+
+  body.mobile-nav-active #mobile-nav {
+      left: 0; /* Bring mobile nav in view */
+  }
+
+  .nav-menu a {
+      padding: 15px; /* More padding for touch targets */
+      font-size: 18px; /* Larger text for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  #header #logo h1 {
+      font-size: 28px; /* Smaller logo text for mobile */
+  }
+
+  .nav-menu li.buy-tickets a {
+      font-size: 12px; /* Adjust button size for smaller screens */
+      padding: 5px 15px; /* Adjust padding */
+  }
+}

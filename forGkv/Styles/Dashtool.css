@@ -1,0 +1,311 @@
+
+
+.litool {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.litool .bg {
+    background-color: #191c2e;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 30px 20px;
+    border-radius: 10px;
+    margin: 40px;
+}
+
+.litool .bg img {
+    width: 55px;
+}
+
+.litool .bg span {
+    font-size: 20px;
+    color: #6C7293;
+}
+
+.litool .bg span p {
+    color: red;
+}
+
+.d-flex {
+    display: flex;
+    gap: 30px;
+    margin: 5px;
+    justify-content: space-between;
+}
+
+.d-flex h2,
+h3 {
+    color: white;
+}
+
+.d-flex a {
+    color: red;
+    text-decoration: none;
+}
+
+.d-flex small,
+span {
+    font-size: 18px;
+    color: #6C7293;
+}
+
+.msg {
+    background-color: #191c2e;
+    padding: 25px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+    /* --dark-body: black; */
+    --dark-main: #191c2e;
+    --dark-second: #2c2c3d;
+    --dark-hover: #292b39;
+    --dark-text: #e0e0e0;
+    --shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+    --font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--dark-body);
+    font-family: var(--font-family);
+    color: var(--dark-text);
+}
+
+.calendar {
+    height: max-content;
+    width: min-content;
+    background-color: var(--dark-main);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--dark-text);
+    padding: 10px;
+}
+
+.calendar-body {
+    padding: 10px;
+}
+
+.calendar-week-day {
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: 600;
+    color: red;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    color: var(--dark-text);
+}
+
+.calendar-days div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.calendar-days div:hover {
+    background-color: var(--dark-hover);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.calendar-days div.curr-date {
+    background-color: red;
+    border-radius: 10px;
+}
+
+.month-picker {
+    padding: 5px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: red;
+}
+
+.month-picker:hover {
+    background-color: var(--dark-hover);
+}
+
+.year-picker {
+    display: flex;
+    align-items: center;
+}
+
+.year-change {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.year-change:hover {
+    background-color: var(--dark-hover);
+}
+
+.calendar-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.toggle {
+    display: flex;
+}
+
+.toggle span {
+    margin-right: 10px;
+    color: var(--dark-text);
+}
+
+.dark-mode-switch {
+    position: relative;
+    width: 48px;
+    height: 25px;
+    border-radius: 14px;
+    background-color: var(--dark-second);
+    cursor: pointer;
+}
+
+.dark-mode-switch-ident {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background-color: var(--dark-main);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.2s ease-in-out;
+}
+
+.dark-mode-switch:hover {
+    background-color: var(--dark-hover);
+}
+
+.month-list {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-main);
+    padding: 20px;
+    grid-template-columns: repeat(3, auto);
+    gap: 5px;
+    display: grid;
+    transform: scale(1.5);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.month-list.show {
+    transform: scale(1);
+    visibility: visible;
+    pointer-events: visible;
+    transition: all 0.2s ease-in-out;
+}
+
+.month-list>div {
+    display: grid;
+    place-items: center;
+}
+
+.month-list>div>div {
+    width: 100%;
+    padding: 5px 20px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--dark-text);
+}
+
+.month-list>div>div:hover {
+    background-color: var(--dark-hover);
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.todo {
+    width: 90%;
+    margin: 60px auto;
+    background-color: #191c2e;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.Dbtn button h3{
+    color: black;
+    padding: 2px 5px;
+}
+.Dbtn button{
+    background-color: red;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.d-flex .form-control{
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    background-color: transparent;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 8px;
+    color: red;
+}
+
+.btn-primary{
+    background-color: red;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.border-bottom{
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.toolcontainer{
+    background-color: black;
+}
+
+.curser a{
+    cursor: pointer;
+}

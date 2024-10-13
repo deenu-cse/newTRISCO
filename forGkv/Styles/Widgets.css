@@ -1,0 +1,20 @@
+.msgx{
+    width: 90%;
+    margin: 20px auto;
+}
+
+.d-flex2{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.d-flex2 img{
+    width: 15px;
+    height: 15px;
+    margin-left: 6px;
+}
+
+.mb-0{
+    margin-bottom: 5px;
+}

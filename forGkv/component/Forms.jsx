@@ -7,6 +7,9 @@ export default function Forms() {
 
     const [formName, setFormName] = useState('');
     const [formFees, setFormFees] = useState('')
+    const [formType, setFormType] = useState('');
+    const [numMembers, setNumMembers] = useState('');
+
     const [bigG, setbigG] = useState({
         GalleryType: "",
         links: ""
@@ -45,13 +48,17 @@ export default function Forms() {
             body: JSON.stringify({
                 fees: formFees,
                 name: formName,
+                type: formType,
+                numMembers: formType === 'Team' ? numMembers : null,
                 fields: formattedFields
             })
         })
             .then(response => response.json())
             .then(data => {
                 alert("Form created:", data);
-                setFields('')
+                setFields('');
+                setFormType('');
+                setNumMembers('');
             })
             .catch(error => {
                 console.error("Error creating form:", error);
@@ -503,6 +510,29 @@ export default function Forms() {
                                     placeholder="Form Fees..."
                                     required
                                 />
+                                <label>Form Type</label>
+                                <select
+                                    value={formType}
+                                    onChange={(e) => setFormType(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Select Form Type</option>
+                                    <option value="Team">Team</option>
+                                    <option value="Individual">Individual</option>
+                                </select>
+
+                                {formType === 'Team' && (
+                                    <div>
+                                        <label>Number of Members in Team</label>
+                                        <input
+                                            type="number"
+                                            value={numMembers}
+                                            onChange={(e) => setNumMembers(e.target.value)}
+                                            placeholder="Number of Members..."
+                                            required
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             {fields.map((field, index) => (
@@ -562,8 +592,8 @@ export default function Forms() {
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     );
 }

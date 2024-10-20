@@ -10,7 +10,7 @@ const AboutUs = () => {
         <div className="about-us">
             <div className="about-container">
                 <div className="profile-section">
-                    <img src={yourPhoto} alt="Deendayal" className="profile-photo" />
+                    <img loading="lazy" src={yourPhoto} alt="Deendayal" className="profile-photo" />
                     <h1>Deendayal</h1>
                     <p>
                         I am a second-year Engineering CSE student at Gurukula Kangri Vishwavidyalaya, Haridwar. 

@@ -30,7 +30,7 @@ export default function Payment() {
                 {qrCodeUrl ? (
                     <>
                         <h2>Scan to Pay</h2>
-                        <img src={qrCodeUrl} alt="QR Code" style={{ width: '300px', height: '300px' }} />
+                        <img loading='lazy' src={qrCodeUrl} alt="QR Code" style={{ width: '300px', height: '300px' }} />
                     </>
                 ) : (
                     <p>Loading QR Code...</p>

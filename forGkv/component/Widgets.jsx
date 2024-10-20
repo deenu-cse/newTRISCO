@@ -57,41 +57,21 @@ export default function Widgets() {
                     </div>
                     {getMessage.map((msg, index) => {
                         return (
-                            <div className="d-flex align-items-center border-bottom py-3" key={index}>
-                                <div className="w-100 ms-3">
-                                    <div className="d-flex name w-100 justify-content-between">
-                                        <h3 className="mb-0">{msg.name}</h3>
-                                        <small>{timeAgo(new Date(msg.createdAt))}</small>
+                            <>
+                                <div className="border-bottom  align-items-center  py-3" key={index}>
+                                    <div className="d-flex w-100 ms-3">
+                                        <div className="d-flex name w-100 justify-content-between">
+                                            <h3 className="mb-0">{msg.name}</h3>
+                                            <small>{timeAgo(new Date(msg.createdAt))}</small>
+                                        </div>
+                                        <span> {msg.subject.split(' ').slice(0, 6).join(' ')}
+                                            {msg.subject.split(' ').length > 6 ? '...' : ''}...</span>
                                     </div>
-                                    <span> {msg.subject.split(' ').slice(0, 6).join(' ')}
-                                        {msg.subject.split(' ').length > 6 ? '...' : ''}...</span>
+                                    <span>{msg.message}</span>
                                 </div>
-                            </div>
+                            </>
                         );
                     })}
-                </div>
-            </div>
-            <div className="col-sm-12 msg msgx col-md-6 col-xl-4">
-                <div className="h-100 bg-secondary rounded p-4">
-                    <div className="d-flex  align-items-center justify-content-between mb-2">
-                        <h2 className="mb-0">Feedbacks</h2>
-                    </div>
-                    <div className="d-flex  align-items-center border-bottom py-3">
-                        <div className="w-100 ms-3">
-                            <div className="d-flex name d-flex2 w-100 justify-content-between">
-                                <h3 className="mb-0">name</h3>
-                                <div className="star">
-                                    <img src='https://img.icons8.com/?size=100&id=60003&format=png&color=FAB005' />
-                                    <img src='https://img.icons8.com/?size=100&id=60003&format=png&color=FAB005' />
-                                    <img src='https://img.icons8.com/?size=100&id=60003&format=png&color=FAB005' />
-                                    <img src='https://img.icons8.com/?size=100&id=60003&format=png&color=FAB005' />
-                                    <img src='https://img.icons8.com/?size=100&id=60003&format=png&color=FAB005' />
-                                </div>
-                                <small>time</small>
-                            </div>
-                            <span>message</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </>

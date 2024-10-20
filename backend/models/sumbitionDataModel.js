@@ -11,6 +11,10 @@ const submissionSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    AllMembers: {
+        type: [String],
+        required: true
+    },
     date: {
         type: String,
     },

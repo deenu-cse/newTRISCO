@@ -28,12 +28,11 @@ const Speakers = () => {
 
     console.log(speaker);
 
-    // Define icons for different social platforms
     const getSocialIcon = (url) => {
         if (url.includes('github')) return github;
         if (url.includes('instagram')) return insta;
         if (url.includes('linkedin')) return linkedinIcon;
-        return null; // Default case if no matching icon
+        return null; 
     };
 
     return (
@@ -47,14 +46,15 @@ const Speakers = () => {
                     {speaker.map((speakerData, index) => (
                         <div className="col-lg-4 col-md-6" key={index}>
                             <div className="speaker">
-                                <img src={speakerData.image} alt={`Speaker ${index + 1}`} className="img-fluid" />
+                                <img loading='lazy' src={speakerData.image} alt={`Speaker ${index + 1}`} className="img-fluid" />
                                 <div className="details">
                                     <h3>{speakerData.name}</h3>
                                     <p>{speakerData.profession}</p>
                                     <div className="social">
+                                        <h4>Know more:-</h4>
                                         {speakerData.contact.map((link, idx) => (
                                             <a key={idx} href={link} target="_blank" rel="noopener noreferrer">
-                                                <img src={getSocialIcon(link)} alt={`Social link ${idx}`} />
+                                                <img loading='lazy' src={getSocialIcon(link)} alt={`Social link ${idx}`} />
                                             </a>
                                         ))}
                                     </div>

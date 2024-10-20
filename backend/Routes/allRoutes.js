@@ -1,6 +1,8 @@
 const express = require("express")
-const { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contact, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage } = require("../Controllers/allControllers")
+const { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contact, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage, googleLogin, getPopularEvent, checkAdmin, getUser } = require("../Controllers/allControllers")
 const router = express.Router()
+
+
 const multer = require('multer');
 const path = require('path')
 
@@ -52,6 +54,11 @@ router.post('/login', login)
 router.post('/verify-token', verify)
 router.get('/profile/:studentId', Getprofile)
 router.get('/event/:studentId', getidevent)
+router.post('/google-login', googleLogin); 
+router.get('/popularEvent', getPopularEvent)
+router.post('/admin', checkAdmin)
+router.get('/users', getUser)
+
 
 
 module.exports = router

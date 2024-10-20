@@ -31,7 +31,7 @@ const Developer = () => {
                     <p className="description">
                         Below is the very first sketch I made when I planned out the structure of the website. It's where the magic started! 💻
                     </p>
-                    <img src={structureImage} alt="Site Structure Diagram" className="structure-image" />
+                    <img loading='lazy' src={structureImage} alt="Site Structure Diagram" className="structure-image" />
                 </div>
             </div>
             <Footer/>

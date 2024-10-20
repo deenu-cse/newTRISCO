@@ -185,7 +185,7 @@ export default function Profile() {
                 <div className="events-info">
                   <h2>Registered Events</h2>
                   {event
-                    .filter((singleEvent) => timeLeft[singleEvent._id] !== 'Past Event')  // Filter out past events
+                    .filter((singleEvent) => timeLeft[singleEvent._id] !== 'Past Event')
                     .map((singleEvent) => (
                       <div className="events-container" key={singleEvent._id}>
                         <div className="events-list">
@@ -206,7 +206,7 @@ export default function Profile() {
 
                   <h2>Past Events</h2>
                   {event
-                    .filter((singleEvent) => timeLeft[singleEvent._id] === 'Past Event')  // Only show past events
+                    .filter((singleEvent) => timeLeft[singleEvent._id] === 'Past Event')
                     .map((singleEvent) => (
                       <div className="events-container" key={singleEvent._id}>
                         <div className="events-list">

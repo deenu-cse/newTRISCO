@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../Styles/Dashtool.css'
 
 export default function Dashtool(props) {
+    const [users, setusers] = useState([])
+    const [submission, setsubmission] = useState([])
+
+
     function timeAgo(date) {
         const currentTime = new Date().getTime();
         const timeDiff = currentTime - date.getTime();
@@ -131,24 +135,59 @@ export default function Dashtool(props) {
         props.onTabSelect('widgets');
     }
 
+    useEffect(() => {
+        const getAllUser = async (req, res) => {
+            try {
+                const response = await fetch('http://localhost:3000/users', {
+                    method: 'GET'
+                })
+
+                const resdata = await response.json();
+                if (response.ok) {
+                    setusers(resdata);
+                }
+            } catch (error) {
+                console.error("An error occurred while fetching the users:", error);
+            }
+        }
+
+        const getsubmission = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/submitedForm', {
+                    method: 'GET'
+                })
+
+                const resdata = await response.json();
+                if (response.ok) {
+                    setsubmission(resdata.forms);
+                    console.log(resdata)
+                }
+            } catch (error) {
+                console.error("An error occurred while fetching the users:", error);
+            }
+        }
+        getAllUser()
+        getsubmission()
+    },[])
+
     return (
         <>
             <div className="toolcontainer">
                 <div className="litool">
                     <div className="bg">
-                        <img src='https://img.icons8.com/?size=100&id=11220&format=png&color=ff0000' />
+                        <img loading='lazy' src='https://img.icons8.com/?size=100&id=11220&format=png&color=ff0000' />
                         <span> Total User
-                            <p>1200</p>
+                            <p>{users.length}</p>
                         </span>
                     </div>
                     <div className="bg">
-                        <img src='https://img.icons8.com/?size=100&id=rATNJXukPnNS&format=png&color=ff0000' />
+                        <img loading='lazy' src='https://img.icons8.com/?size=100&id=rATNJXukPnNS&format=png&color=ff0000' />
                         <span>Total Participents
-                            <p>190</p>
+                            <p>{submission.length}</p>
                         </span>
                     </div>
                     <div className="bg">
-                        <img src='https://img.icons8.com/?size=100&id=70640&format=png&color=ff0000' /><span>Total Revenue
+                        <img loading='lazy' src='https://img.icons8.com/?size=100&id=70640&format=png&color=ff0000' /><span>Total Revenue
                             <p>Rs.1400</p>
                         </span>
                     </div>

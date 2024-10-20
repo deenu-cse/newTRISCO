@@ -33,6 +33,10 @@ h1 {
     padding-left: 10px;
 }
 
+.form-group input {
+    max-width: 94%;
+}
+
 label {
     display: block;
     font-weight: 600;
@@ -101,8 +105,18 @@ select:focus {
     }
 }
 
-
 input,
 select {
     transition: all 0.3s ease-in-out;
+}
+
+.loading-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-container img{
+    width: 120px;
 }

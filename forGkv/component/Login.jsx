@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import '../Styles/Authform.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function Login() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -33,6 +39,7 @@ export default function Login() {
             if (response.ok) {
                 toast.success('Login successful!');
                 localStorage.setItem('userToken', resData.userToken);
+                navigate('/')
                 setFormData({
                     email: '',
                     password: '',
@@ -46,6 +53,31 @@ export default function Login() {
         }
     };
 
+    const handleGoogleLogin = (response) => {
+        const googleToken = response.credential;
+
+        fetch('http://localhost:3000/google-login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: googleToken }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.userToken) {
+                    toast.success('Login successful!');
+                    localStorage.setItem('userToken', data.userToken);
+                    navigate('/')
+                } else {
+                    toast.error(data.message || 'Login failed.');
+                }
+            })
+            .catch(err => {
+                console.error('Error during login:', err);
+                toast.error('An error occurred during Google login.');
+            });
+    };
     return (
         <>
             <ToastContainer />
@@ -58,7 +90,7 @@ export default function Login() {
                         <input
                             type="email"
                             id="email"
-                            placeholder="Enter your email"
+                            placeholder="Enter your email..."
                             required
                             onChange={handleChange}
                         />
@@ -69,7 +101,7 @@ export default function Login() {
                         <input
                             type="password"
                             id="password"
-                            placeholder="Enter your password"
+                            placeholder="Enter your password..."
                             required
                             onChange={handleChange}
                         />
@@ -78,7 +110,14 @@ export default function Login() {
                     <button type="submit" className="signup-btn">
                         Sign In
                     </button>
+                    <p>Or</p>
 
+                    <hr></hr>
+
+                    <GoogleLogin
+                        onSuccess={handleGoogleLogin}
+                        onError={() => toast.error('Google login failed.')}
+                    />
                     <p className="login-text">
                         Not have an account? <a href="/userAuth">Sign Up</a>
                     </p>

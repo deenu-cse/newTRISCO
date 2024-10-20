@@ -26,7 +26,7 @@ export default function Fullgallery() {
                         <h3 className="event-name">{event.GalleryType}</h3>
                         <div className="images-container">
                             {event.links.map((image, imgIndex) => (
-                                <img
+                                <img loading='lazy'
                                     key={imgIndex}
                                     src={image}
                                     alt={`Event Image ${imgIndex + 1}`}

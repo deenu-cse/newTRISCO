@@ -11,7 +11,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="rowf">
                         <div className="col-lg-3 col-md-6 footer-info">
-                            <img src={tlogo} alt="TRISCO" />
+                            <img loading='lazy' src={tlogo} alt="TRISCO" />
                             <p>
                                 Trisco is your go-to platform for managing and participating in college events. Stay informed with real-time email notifications about multiple upcoming events, complete with date, time, and registration forms. Whether you want to register for a single event or track your entire event activity, Trisco ensures a seamless and personalized experience for every user.
                             </p>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../Styles/Faq.css'; // Adjust the path to your CSS file
+import '../Styles/Faq.css';
 
 const Faq = () => {
     const [openIndex, setOpenIndex] = useState(null);
@@ -11,13 +11,13 @@ const Faq = () => {
             id: "faq1"
         },
         {
-            question: "How does Trisco notify users about new events?",
-            answer: "Whenever a new event is added, signed-in users receive an email notification with all relevant details such as the event's date, time, description, and registration forms. This keeps everyone informed and ensures that no one misses out on important events.",
+            question: "What is G.P.L?",
+            answer: "Gurukul Premier League (G.P.L) is a major part of the Jnanagni Fest at Gurukula Kangri Vishwavidyalaya. It features a wide range of sports events, including football, basketball, cricket, and table tennis, kabbadi etc., along with several e-sports competitions.",
             id: "faq2"
         },
         {
-            question: "Can Trisco handle multiple events at the same time?",
-            answer: "Yes, Trisco is capable of managing multiple events simultaneously. Each event has its own details page, including registration forms, making it easy for students to sign up for any event they are interested in.",
+            question: "What are the major benefits of G.P.L?",
+            answer: "Participating in the Gurukul Premier League (G.P.L) offers numerous benefits, including the opportunity to win prestigious prizes for the first, second, and third-place winners in each sport. Additionally, every participant receives a certificate of recognition, making it a great way to showcase your involvement in college activities.",
             id: "faq3"
         },
         {
@@ -53,11 +53,11 @@ const Faq = () => {
                         <ul id="faq-list">
                             {faqItems.map((item, index) => (
                                 <li key={item.id}>
-                                    <a 
-                                        onClick={() => toggleOpen(index)} 
+                                    <a
+                                        onClick={() => toggleOpen(index)}
                                         className={openIndex === index ? "collapse" : "collapsed"}
                                     >
-                                        {item.question} 
+                                        {item.question}
                                         <i className="fa fa-minus-circle"></i>
                                     </a>
                                     {openIndex === index && (

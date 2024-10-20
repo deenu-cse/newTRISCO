@@ -133,7 +133,7 @@ export default function AboutShedule() {
                         {eventGallery.length > 0 ? (
                             eventGallery.map((imgUrl, index) => (
                                 <div key={index} className="gallery-item">
-                                    <img src={imgUrl} alt={`Gallery ${index + 1}`} />
+                                    <img loading='lazy' src={imgUrl} alt={`Gallery ${index + 1}`} />
                                 </div>
                             ))
                         ) : (

@@ -23,12 +23,12 @@ const Header = () => {
       <div className="containerc">
         <div id="logo" className="pull-left">
           <a href="/" className="scrollto">
-            <img src={tlogo} alt="" title="" />
+            <img loading='lazy' src={tlogo} alt="" title="" />
           </a>
         </div>
 
         <button id="mobile-nav-toggle" onClick={toggleMobileNav}>
-          <img src="https://img.icons8.com/?size=100&id=83195&format=png&color=FFFFFF" alt="" /> 
+          <img loading='lazy' src="https://img.icons8.com/?size=100&id=83195&format=png&color=FFFFFF" alt="" /> 
         </button>
 
         <nav id="nav-menu-container" className={mobileNavActive ? 'active' : ''}>

@@ -176,7 +176,7 @@ export default function AboutEvent() {
                                 <div key={index} className="gallery-item">
                                     {gallery.image && gallery.image.length > 0 ? (
                                         gallery.image.map((imgUrl, imgIndex) => (
-                                            <img src={imgUrl} key={imgIndex} alt={`Gallery ${imgIndex + 1}`} />
+                                            <img loading='lazy' src={imgUrl} key={imgIndex} alt={`Gallery ${imgIndex + 1}`} />
                                         ))
                                     ) : (
                                         <p>No images available</p>

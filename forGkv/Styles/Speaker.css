@@ -36,6 +36,9 @@
 
 #speakers .details .social {
     height: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 #speakers .speaker .details a {

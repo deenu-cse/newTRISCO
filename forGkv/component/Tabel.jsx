@@ -9,6 +9,10 @@ export default function Tabel() {
     const [createdForm, setcreatedForm] = useState([])
     const [submitedforms, setsubmitedforms] = useState([])
     const [galleryImage, setgalleryImage] = useState([])
+    const [searchQuery, setSearchQuery] = useState("");
+    const [users, setusers] = useState([])
+
+
     useEffect(() => {
         const getHero = async () => {
             try {
@@ -199,6 +203,27 @@ export default function Tabel() {
         }
     };
 
+    const searchFilter = submitedforms.filter((data) =>
+        data.studentId.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+
+    useEffect(() => {
+        const getAllUser = async (req, res) => {
+            try {
+                const response = await fetch('http://localhost:3000/users', {
+                    method: 'GET'
+                })
+
+                const resdata = await response.json();
+                if (response.ok) {
+                    setusers(resdata);
+                }
+            } catch (error) {
+                console.error("An error occurred while fetching the users:", error);
+            }
+        }
+        getAllUser()
+    }, [])
 
     return (
         <>
@@ -313,21 +338,24 @@ export default function Tabel() {
                             <h6 className="table-title">Registered User Table</h6>
                             <a onClick={downloadExcel}>Take Sheet</a>
                         </div>
+                        <div className="nfirst">
+                            <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder='Enter studentId...' />
+                        </div>
                         <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Event Name</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">StudentId</th>
                                     <th scope="col">rollNo</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {submitedforms.map((data, index) => (
+                                {searchFilter.map((data, index) => (
                                     <tr key={index}>
                                         <th scope="row">{index + 1}</th>
                                         <td>{data.Event}</td>
-                                        <td>{data.submissionData.Name}</td>
+                                        <td>{data.studentId.length > 20 ? data.studentId.slice(0, 10) + "..." : data.studentId}</td>
                                         <td>{data.submissionData.rollNo}</td>
                                     </tr>
                                 ))}
@@ -372,48 +400,14 @@ export default function Tabel() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>jacob@email.com</td>
-                            </tr>
+                            {users.map((data, index) => (
+                                <tr>
+                                    <th scope="row">{index + 1}</th>
+                                    <td>{data.name}</td>
+                                    <td>{data.studentId}</td>
+                                    <td>{data.email}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

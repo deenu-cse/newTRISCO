@@ -44,14 +44,14 @@ const Venue = () => {
 
             <div className="container-fluid venue-gallery-container">
                 <div className="venue-gallery">
-                    <img src={first} alt="1" className="img-fluid" />
-                    <img src={two} alt="2" className="img-fluid" />
-                    <img src={three} alt="3" className="img-fluid" />
-                    <img src={four} alt="4" className="img-fluid" />
-                    <img src={five} alt="5" className="img-fluid" />
-                    <img src={six} alt="6" className="img-fluid" />
-                    <img src={seven} alt="7" className="img-fluid" />
-                    <img src={eight} alt="8" className="img-fluid" />
+                    <img loading='lazy' src={first} alt="1" className="img-fluid" />
+                    <img loading='lazy' src={two} alt="2" className="img-fluid" />
+                    <img loading='lazy' src={three} alt="3" className="img-fluid" />
+                    <img loading='lazy' src={four} alt="4" className="img-fluid" />
+                    <img loading='lazy' src={five} alt="5" className="img-fluid" />
+                    <img loading='lazy' src={six} alt="6" className="img-fluid" />
+                    <img loading='lazy' src={seven} alt="7" className="img-fluid" />
+                    <img loading='lazy' src={eight} alt="8" className="img-fluid" />
                 </div>
             </div>
         </section>

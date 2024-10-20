@@ -65,7 +65,7 @@ const Gallery = () => {
                     {gallery && gallery.length > 0 ? (
                         gallery.map((item, index) => (
                             <div key={index} className="gallery-item">
-                                <img src={item.image} alt={`Image ${index + 1}`} />
+                                <img loading='lazy' src={item.image} alt={`Image ${index + 1}`} />
                             </div>
                         ))
                     ) : (

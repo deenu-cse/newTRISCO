@@ -1,15 +1,39 @@
 import React, { useEffect, useState } from "react";
 import '../Styles/Event.css'
 import { NavLink } from "react-router-dom";
+import popular from '../../img/popular.png'
+
 
 const Schedule = () => {
     const [activeDay, setActiveDay] = useState("");
     const [shedule, setshedule] = useState([]);
     const [days, setDays] = useState([]);
+    const [popularEvent, setPopularEvent] = useState(null);
+
+
+    console.log(popularEvent)
+
 
     const handleDayClick = (day) => {
         setActiveDay(day);
     };
+
+    useEffect(() => {
+        const getPopularEvent = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/popularEvent',
+                    { method: 'GET' });
+                const resdata = await response.json();
+                if (response.ok) {
+                    setPopularEvent(resdata.popularEvent);
+                }
+            } catch (error) {
+                console.log('Error fetching popular event:', error);
+            }
+        };
+
+        getPopularEvent();
+    }, []);
 
     useEffect(() => {
         const getShedule = async () => {
@@ -61,8 +85,8 @@ const Schedule = () => {
                 </ul>
 
                 <div className="tab-content row justify-content-center">
-                    <div className="col-lg-9 tab-pane fade show active">
-                        {filterScheduleByDay(activeDay).map((item) => (
+                    {filterScheduleByDay(activeDay).map((item) => (
+                        <div className="col-lg-9 tab-pane fade show active pop">
                             <NavLink to={`/AboutEventshedule/${item.name}`}>
                                 <ScheduleItem
                                     key={item._id}
@@ -73,8 +97,13 @@ const Schedule = () => {
                                     }
                                 />
                             </NavLink>
-                        ))}
-                    </div>
+                            <div className="popular">
+                                {item.name == popularEvent &&
+                                    <img loading='lazy' src={popular} />
+                                }
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

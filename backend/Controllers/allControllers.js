@@ -15,11 +15,11 @@ const Jimp = require('jimp')
 const tesseract = require("tesseract.js");
 const jwt = require("jsonwebtoken")
 const { v4: uuidv4 } = require('uuid');
-const client = require("../middelware/redis");
 const { sendEventNotification } = require("../middelware/mailer");
 const Igallery = require("../models/igalleryModel");
 const Client = require("../middelware/redis");
-
+const { OAuth2Client } = require("google-auth-library")
+const Gclient = new OAuth2Client('562150386706-rj0h8cols1oimfqm0vj2t89c1v3nkano.apps.googleusercontent.com');
 
 
 
@@ -145,7 +145,7 @@ const gkvSpeaker = async (req, res) => {
 
 const Getspeaker = async (req, res) => {
     try {
-        const response = await Speaker.find().sort({ createdAt: -1 })
+        const response = await Speaker.find()
 
         const cacheKey = await Client.keys('Speaker_*')
         if (cacheKey > 0) {
@@ -344,10 +344,10 @@ const Event = async (req, res) => {
 }
 
 const createForm = async (req, res) => {
-    const { name, fees, fields } = req.body;
+    const { name, fees, fields, numMembers } = req.body;
 
     try {
-        const newForm = await Eventform.create({ name, fees, fields });
+        const newForm = await Eventform.create({ name, fees, fields, numMembers });
         res.status(200).json({ message: "Form created", newForm });
     } catch (error) {
         console.error(error);
@@ -395,6 +395,7 @@ const formById = async (req, res) => {
         if (!getEvent) {
             return res.status(404).json({ message: "Form not found" })
         }
+        console.log(getEvent)
         res.status(200).json(getEvent)
     } catch (error) {
         console.error(error);
@@ -403,7 +404,7 @@ const formById = async (req, res) => {
 }
 
 const Submitform = async (req, res) => {
-    const { submissionData, eventName } = req.body;
+    const { submissionData, eventName, AllMembers } = req.body;
     console.log(req.body);
     try {
         if (!submissionData) {
@@ -415,13 +416,35 @@ const Submitform = async (req, res) => {
             return res.status(400).json({ message: "Use the same email which you used in registration." });
         }
 
+        const validUserPromises = AllMembers.map(async (studentId) => {
+            const user = await User.findOne({ studentId });
+            return user !== null;
+        });
+
+        const validUsers = await Promise.all(validUserPromises);
+
+        if (validUsers.includes(false)) {
+            return res.status(400).json({ message: "One or more studentIds are invalid." });
+        }
+
         const existingSubmission = await Submission.findOne({
             studentId: user.studentId,
             Event: eventName
         });
 
+        const members = await Eventform.findOne({ name: eventName })
+        if (!members) {
+            return res.status(400).json({ message: "Form not found" });
+        }
+
+        const { numMembers } = members
+
+        if (numMembers != AllMembers.length) {
+            return res.status(400).json({ message: `${numMembers} members are required for registration` });
+        }
+
         if (existingSubmission) {
-            return res.status(400).json({ message: 'You have already submitted this form using this roll number.' });
+            return res.status(400).json({ message: 'You have already submitted this form.' });
         }
 
         const EventDate = await Shedule.findOne({ name: eventName });
@@ -433,7 +456,8 @@ const Submitform = async (req, res) => {
             submissionData,
             studentId: user.studentId,
             date,
-            time
+            time,
+            AllMembers
         });
 
         res.status(200).json({ message: "Form submitted successfully", formData });
@@ -522,6 +546,16 @@ const submitForm = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(400).json({ message: 'Error in getting submitted form', error });
+    }
+}
+
+const getUser = async (req, res) => {
+    try {
+        const response = await User.find()
+        res.status(200).json(response)
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: 'Error in getting users', error });
     }
 }
 
@@ -718,15 +752,29 @@ const Getprofile = async (req, res) => {
 }
 
 const getidevent = async (req, res) => {
-    const { studentId } = req.params
+    const { studentId } = req.params;
     try {
-        const Events = await Submission.find({ studentId })
-        res.status(200).json({ message: "Event get succesfull", Events })
+        const directEvents = await Submission.find({ studentId });
+
+        const memberEvents = await Submission.find({ AllMembers: studentId });
+
+        const allEvents = [...directEvents, ...memberEvents];
+
+        if (allEvents.length === 0) {
+            return res.status(404).json({ message: "No events found for this studentId." });
+        }
+
+        const uniqueEvents = allEvents.filter((event, index, self) =>
+            index === self.findIndex((e) => e._id.toString() === event._id.toString())
+        );
+
+        res.status(200).json({ message: "Events retrieved successfully", Events: uniqueEvents });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server error" });
     }
-}
+};
+
 
 const Fgallery = async (req, res) => {
     const { GalleryType, links } = req.body;
@@ -755,5 +803,75 @@ const Fgallery = async (req, res) => {
     }
 }
 
+const googleLogin = async (req, res) => {
+    const { token } = req.body;
 
-module.exports = { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage }
+    try {
+        const ticket = await Gclient.verifyIdToken({
+            idToken: token,
+            audience: '562150386706-rj0h8cols1oimfqm0vj2t89c1v3nkano.apps.googleusercontent.com',
+        });
+
+        const { email } = ticket.getPayload();
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ message: "User not found. Please sign up first." });
+        }
+
+        const userToken = await user.generatToken();
+        return res.status(200).json({ message: "Login successful", userToken });
+
+    } catch (error) {
+        console.error("Error during Google login:", error);
+        return res.status(500).json({ message: "Server error during Google login" });
+    }
+};
+
+const getPopularEvent = async (req, res) => {
+    try {
+        const submissions = await Submission.aggregate([
+            {
+                $group: {
+                    _id: "$Event",
+                    totalParticipants: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { totalParticipants: -1 }
+            },
+            {
+                $limit: 1
+            }
+        ]);
+
+        const popularEvent = submissions.length ? submissions[0]._id : null;
+
+        res.status(200).json({ popularEvent });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: 'Error fetching popular event', error });
+    }
+};
+
+const checkAdmin = async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, "Gurukul_Kangri");
+        const { email } = decoded;
+
+        let Admin = false;
+        if (email === 'vdeendayal866@gmail.com' || email === 'deendayalv414@gmail.com') {
+            Admin = true;
+        }
+
+        res.status(200).json({ valid: Admin });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: 'Error fetching Admin', error });
+    }
+};
+
+
+module.exports = { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage, googleLogin, getPopularEvent, checkAdmin, getUser }

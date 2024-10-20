@@ -19,7 +19,7 @@ export default function Extranav() {
             <div className="containerc">
                 <div id="logo" className="pull-left">
                     <a href="/" className="scrollto">
-                        <img src={tlogo} alt="" title="" />
+                        <img loading='lazy' src={tlogo} alt="" title="" />
                     </a>
                 </div>
 

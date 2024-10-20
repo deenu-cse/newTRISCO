@@ -32,6 +32,12 @@
     text-align: left;
 }
 
+.table tbody td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+}
+
 .table tbody td,
 .table tbody th {
     padding: 10px;

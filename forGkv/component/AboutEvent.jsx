@@ -11,6 +11,7 @@ export default function AboutEvent() {
     const [eventGallery, seteventGallery] = useState([]);
     const [timeRemaining, setTimeRemaining] = useState('');
     const [isValidToken, setIsValidToken] = useState(false);
+    const [winnerPage, setwinnerPage] = useState(null)
 
     const navigate = useNavigate()
 
@@ -105,18 +106,30 @@ export default function AboutEvent() {
         }, 1000);
     };
 
-    // const filteredData = submitData.filter(data => {
-    //     const regex = new RegExp(eventName, 'i');
-    //     return regex.test(data.Event);
-    // });
-
     if (!isValidToken) {
         navigate('/userAuth/login')
     }
 
+    useEffect(() => {
+        const fetchWinner = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/highlights`, {
+                    method: 'GET',
+                });
+                const resdata = await response.json();
+                if (response.ok) {
+                    setwinnerPage(resdata);
+                }
+            } catch (error) {
+                console.log('Error while getting winners:', error);
+            }
+        }
+        fetchWinner();
+    }, [eventName]);
+
     return (
         <>
-            <Extranav/>
+            <Extranav />
             <section
                 id="intro"
                 style={{
@@ -188,6 +201,19 @@ export default function AboutEvent() {
                         )}
                     </div>
                 </div>
+            </section>
+            <section>
+                {winnerPage ? (
+                    <div className="winner-post">
+                        <h2>{winnerPage.title} winners blog</h2>
+                        <div
+                            className="winner-content"
+                            dangerouslySetInnerHTML={{ __html: winnerPage.content }}
+                        ></div>
+                    </div>
+                ) : (
+                    <p></p>
+                )}
             </section>
             <div className="regbtn">
                 <NavLink to={`/#schedule`}>

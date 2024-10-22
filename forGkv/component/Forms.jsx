@@ -455,7 +455,7 @@ export default function Forms() {
                                 </div>
                                 <div className="input">
                                     <label>Date</label>
-                                    <input name='date' value={shedule.date} onChange={handelShedule} placeholder='Enter event date...' />
+                                    <input name='date' value={shedule.date} onChange={handelShedule} placeholder='Enter event date D/M/Y' />
                                 </div>
                                 <div className="input">
                                     <label>Name</label>

@@ -18,7 +18,7 @@ export default function Sidebar({ onTabSelect }) {
         setpages(false);
 
         if (tab === 'dashboard') setdash(true);
-        if (tab === 'elements') seteli(true);
+        if (tab === 'winner') seteli(true);
         if (tab === 'widgets') setwidget(true);
         if (tab === 'forms') setforms(true);
         if (tab === 'tables') settables(true);
@@ -50,9 +50,9 @@ export default function Sidebar({ onTabSelect }) {
                                 <img loading='lazy' src='https://img.icons8.com/?size=100&id=87061&format=png&color=737373' />
                                 Dashboard
                             </li>
-                            <li onClick={() => handleTabClick('elements')} className={eli ? 'active' : ''}>
+                            <li onClick={() => handleTabClick('winner')} className={eli ? 'active' : ''}>
                                 <img loading='lazy' src='https://img.icons8.com/?size=100&id=96831&format=png&color=737373' />
-                                Elements
+                                Winners
                             </li>
                             <li onClick={() => handleTabClick('widgets')} className={widget ? 'active' : ''}>
                                 <img loading='lazy' src='https://img.icons8.com/?size=100&id=78290&format=png&color=737373' />

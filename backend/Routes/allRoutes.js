@@ -1,5 +1,5 @@
 const express = require("express")
-const { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contact, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage, googleLogin, getPopularEvent, checkAdmin, getUser } = require("../Controllers/allControllers")
+const { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contact, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage, googleLogin, getPopularEvent, checkAdmin, getUser, winnerPage, Getwinner, GetAll, WinnerDelete, EventHighlight } = require("../Controllers/allControllers")
 const router = express.Router()
 
 
@@ -54,11 +54,15 @@ router.post('/login', login)
 router.post('/verify-token', verify)
 router.get('/profile/:studentId', Getprofile)
 router.get('/event/:studentId', getidevent)
-router.post('/google-login', googleLogin); 
+router.post('/google-login', googleLogin);
 router.get('/popularEvent', getPopularEvent)
 router.post('/admin', checkAdmin)
 router.get('/users', getUser)
-
+router.post('/winner', winnerPage)
+router.get('/getWinner/:eventName', Getwinner)
+router.get('/getAllWinner', GetAll)
+router.delete('/deleteWinner/:id', WinnerDelete)
+router.get('/highlights', EventHighlight)
 
 
 module.exports = router

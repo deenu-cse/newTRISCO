@@ -8,6 +8,7 @@ import Widgets from './Widgets';
 import Tabel from './Tabel';
 import Pages from './Pages';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Winner from './Winner';
 
 export default function Dashboard() {
     const [activeTab, setActiveTab] = useState('dashboard');
@@ -66,6 +67,7 @@ export default function Dashboard() {
                         <Navbar />
                         {activeTab === 'dashboard' && <Dashtool onTabSelect={handleTabSelect} />}
                         {activeTab === 'forms' && <Forms />}
+                        {activeTab === 'winner' && <Winner/>}
                         {activeTab === 'widgets' && <Widgets />}
                         {activeTab === 'tables' && <Tabel />}
                         {activeTab === 'pages' && <Pages />}

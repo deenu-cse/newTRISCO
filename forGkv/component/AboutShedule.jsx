@@ -7,11 +7,14 @@ export default function AboutShedule() {
     const [schedule, setSchedule] = useState(null);
     const [submitData, setSubmitData] = useState([]);
     const [eventGallery, setEventGallery] = useState([]);
-    
+    const [winnerPage, setwinnerPage] = useState(null)
+
 
     const { id } = useParams();
 
     const eventName = id
+
+    console.log(winnerPage)
 
     useEffect(() => {
         const getSchedule = async () => {
@@ -51,6 +54,24 @@ export default function AboutShedule() {
         getSubmitForm();
     }, []);
 
+    useEffect(() => {
+        const fetchWinner = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/getWinner/${eventName}`, {
+                    method: 'GET',
+                });
+                const resdata = await response.json();
+                if (response.ok) {
+                    setwinnerPage(resdata.winnerData);
+                }
+            } catch (error) {
+                console.log('Error while getting winners:', error);
+            }
+        }
+        fetchWinner();
+    }, [eventName]);
+
+
     const Setdate = (time) => {
         const [day, month, year] = time.split('/')
         const eventDate = new Date(`${year}-${month}-${day}`)
@@ -59,7 +80,7 @@ export default function AboutShedule() {
 
         if (timeLeft < 0) {
             return 'Event already started';
-          }
+        }
 
         const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24))
         const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
@@ -141,6 +162,19 @@ export default function AboutShedule() {
                         )}
                     </div>
                 </div>
+            </section>
+            <section>
+                {winnerPage ? (
+                    <div className="winner-post">
+                        <h2>{winnerPage.title} winners blog</h2>
+                        <div
+                            className="winner-content"
+                            dangerouslySetInnerHTML={{ __html: winnerPage.content }}
+                        ></div>
+                    </div>
+                ) : (
+                    <p></p>
+                )}
             </section>
             <div className="regbtn">
                 <NavLink to={`/EventForm/${eventName}`}>

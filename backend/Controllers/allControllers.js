@@ -18,7 +18,8 @@ const { v4: uuidv4 } = require('uuid');
 const { sendEventNotification } = require("../middelware/mailer");
 const Igallery = require("../models/igalleryModel");
 const Client = require("../middelware/redis");
-const { OAuth2Client } = require("google-auth-library")
+const { OAuth2Client } = require("google-auth-library");
+const Winner = require("../models/winnerModel");
 const Gclient = new OAuth2Client('562150386706-rj0h8cols1oimfqm0vj2t89c1v3nkano.apps.googleusercontent.com');
 
 
@@ -873,5 +874,57 @@ const checkAdmin = async (req, res) => {
     }
 };
 
+const winnerPage = async (req, res) => {
+    const { title, content } = req.body
+    try {
+        const winners = Winner.create({
+            title,
+            content
+        })
+        res.status(200).json({ msg: "Winners created", winners })
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: 'Error creating winner page', error });
+    }
+}
 
-module.exports = { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage, googleLogin, getPopularEvent, checkAdmin, getUser }
+const Getwinner = async (req, res) => {
+    const { eventName } = req.params
+    try {
+        const winnerData = await Winner.findOne({ title: new RegExp(`^${eventName}$`, 'i') });
+        res.status(200).json({ msg: "Get all winner", winnerData })
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: 'Error fetching winners', error });
+    }
+}
+const GetAll = async (req, res) => {
+    try {
+        const getWinner = await Winner.find()
+        res.status(200).json(getWinner)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const WinnerDelete = async (req, res) => {
+    try {
+        const { id } = req.params
+        const Winners = await Winner.findByIdAndDelete(id)
+        res.status(200).json({ msg: "Winner deleted succesfully" })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const EventHighlight = async (req, res) => {
+    try {
+        const highlight = await Winner.findOne({ title: 'Highlights' })
+        res.status(200).json(highlight)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+module.exports = { Herosection, GetHero, DeleteHero, gkvSpeaker, Getspeaker, DeleteSpeaker, Makeshedule, Getshedule, DeleteShedule, MakeGallery, GetGallery, Event, createForm, getForm, formById, Submitform, getQr, Createdforms, DeleteForm, Contactform, getContact, submitForm, Excelsheet, getGallery, GetbyName, IcreateForm, getIgallery, Signupform, login, verify, Getprofile, getidevent, Fgallery, DImage, googleLogin, getPopularEvent, checkAdmin, getUser, winnerPage, Getwinner, GetAll, WinnerDelete, EventHighlight }

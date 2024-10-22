@@ -61,79 +61,110 @@
     color: #f82249;
   }
   
-  #contact .form {
-    background: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
- @media screen and (max-width: 600px) {
-  .contactForm{
-    width: 480px;
-  }
- }
-
- @media screen and (max-width: 490px) {
-  .contactForm{
-    width: 400px;
-  }
- }
- @media screen and (max-width: 350px) {
-  .contactForm{
-    width: 330px;
-  }
- }
-
-  
-  #contact .form .form-group input,
-  #contact .form .form-group textarea {
-    width: 93%;
-    border: 1px solid #ddd;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  #contact .form .form-group input:focus,
-  #contact .form .form-group textarea:focus {
-    border-color: #4869df;
-    outline: none;
-  }
-  
-  #contact .submit-btn {
-    background: #f82249;
-    border: none;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  #contact .submit-btn:hover {
-    background: #e0072f;
-  }
-  
-  #contact .text-center {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-.formy button{
-  margin-bottom: 10px;
-}
-
-#sendmessage{
-  color: #0e1e55;
-}
-
-@media (max-width: 768px) {
   .formy {
-      width: 80%;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   }
+  
+  .formy h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  #sendmessage, #errormessage {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  
+  #sendmessage {
+    color: #28a745;
+    background-color: #e6ffe6;
+  }
+  
+  #errormessage {
+    color: #dc3545;
+    background-color: #ffe6e6;
+  }
+  
+  .formy-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .formy{
+    flex: 1;
+    min-width: calc(50% - 10px);
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+  }
+  
+  textarea.form-control {
+    resize: none;
+  }
+  
+.formy textarea{
+  width: 93%;
 }
 
+  .submit-btn {
+    background-color: #f82249;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #e52f41;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  /* Media Queries for responsiveness */
+  @media (max-width: 768px) {
+    .formy {
+      width: 90%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form-control {
+      font-size: 14px;
+    }
+  
+    .submit-btn {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+  }
+  

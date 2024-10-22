@@ -90,13 +90,13 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="form formy">
+        <div className=" formy">
           {messageSent && <div id="sendmessage">Your message has been sent. Thank you!</div>}
           {errorMessage && <div id="errormessage">{errorMessage}</div>}
 
           <form onSubmit={handleSubmit} className="contactForm">
-            <div className="form-row">
-              <div className="form-group col-md-6 set">
+            <div className="formy-row">
+              <div className="formy col-md-6 set">
                 <input
                   type="text"
                   name="name"
@@ -108,7 +108,7 @@ const Contact = () => {
                   onChange={handleInput}
                 />
               </div>
-              <div className="form-group col-md-6">
+              <div className="formy col-md-6">
                 <input
                   type="email"
                   className="form-control"
@@ -120,29 +120,29 @@ const Contact = () => {
                   onChange={handleInput}
                 />
               </div>
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                name="subject"
-                value={message.subject}
-                id="subject"
-                placeholder="Subject"
-                required
-                onChange={handleInput}
-              />
-            </div>
-            <div className="form-group">
-              <textarea
-                className="form-control"
-                name="message"
-                value={message.message}
-                rows="5"
-                placeholder="Message"
-                required
-                onChange={handleInput}
-              ></textarea>
+              <div className="formy">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="subject"
+                  value={message.subject}
+                  id="subject"
+                  placeholder="Subject"
+                  required
+                  onChange={handleInput}
+                />
+              </div>
+              <div className="formy">
+                <textarea
+                  className="form-control"
+                  name="message"
+                  value={message.message}
+                  rows="5"
+                  placeholder="Message"
+                  required
+                  onChange={handleInput}
+                ></textarea>
+              </div>
             </div>
             <div className="text-center">
               <button type="submit" className="submit-btn">Send Message</button>

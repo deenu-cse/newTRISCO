@@ -63,6 +63,12 @@
   top: 50%;
 }
 
+@media screen and (max-width: 510px) {
+  .popular{
+    top: 40%;
+  }
+}
+
 .pop img{
   width: 70px;
   height: 30px;

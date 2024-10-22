@@ -25,19 +25,17 @@ app.use('/', Routes)
 
 
 if (cluster.isPrimary) {
-    // Create workers for each CPU core
     for (let i = 0; i < totalCpu; i++) {
         cluster.fork();
     }
 
-    // When a worker exits, fork a new one
     cluster.on('exit', (worker, code, signal) => {
         console.log(`Worker ${worker.process.pid} exited. Forking a new one.`);
         cluster.fork();
     });
 } else {
     Connectdb().then(() => {
-        app.listen(3000, () => { // Listen on a single port (3000)
+        app.listen(3000, () => { 
             console.log(`Server running on port 3000 with process ID: ${process.pid}`);
         });
     });
